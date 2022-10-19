@@ -1,0 +1,7 @@
+com/lica/customer/CustomerApplication.class
+com/lica/customer/CustomerRegistrationRequest.class
+com/lica/customer/CustomerService.class
+com/lica/customer/CustomerController.class
+com/lica/customer/Customer$CustomerBuilder.class
+com/lica/customer/CustomerRepository.class
+com/lica/customer/Customer.class
