@@ -1,9 +1,17 @@
 package com.lica.customer;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
-public record CustomerService(CustomerRepository  customerRepository) {
+@AllArgsConstructor
+public class CustomerService{
+
+    private final CustomerRepository  customerRepository;
+    private final RestTemplate restTemplate;
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder()
                 .firstName(customerRegistrationRequest.firstName())
@@ -13,9 +21,19 @@ public record CustomerService(CustomerRepository  customerRepository) {
 
          // TODO: 18.10.2022 check if email valid
          // TODO: 18.10.2022 check if email not taken
-         // TODO: 18.10.2022 store customer in db
+         customerRepository.saveAndFlush(customer);
+        // TODO: 18.10.2022 check if fraudster
+        FraudCheckResponse fraudCheckResponse =
+                restTemplate.getForObject("http://FRAUD/api/v1/fraud-check/{customerId}",
+                FraudCheckResponse.class, customer.getId());
 
-        customerRepository.save(customer);
+        if (fraudCheckResponse.isFraudster()){
+            throw new IllegalStateException("fraudster");
+        }
+
+
+        // TODO: 18.10.2022 send notfication
+
     }
 }
 
