@@ -1,4 +1,4 @@
-package com.lica.fraud;
+package com.lica.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }

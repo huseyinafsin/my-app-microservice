@@ -1,15 +1,14 @@
-package com.lica.customer;
+package com.lica;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients(basePackages = "com.lica.clients")
-public class CustomerApplication {
+public class ApiGw {
     public static void main(String[] args) {
-        SpringApplication.run(CustomerApplication.class, args);
+
+        SpringApplication.run(ApiGw.class, args);
     }
 }
